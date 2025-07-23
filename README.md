@@ -14,7 +14,6 @@ La solución fue desarrollada y probada exitosamente en el siguiente entorno de 
 ### Estructura del Repositorio
 
 ```
-.
 ├── config/
 │   └── config.yaml          # Archivo de configuración (opcional, ya que el notebook lo genera)
 ├── data/
