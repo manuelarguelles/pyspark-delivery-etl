@@ -1,0 +1,4 @@
+# Versiones utilizadas en el entorno de Databricks para reproducibilidad
+pyspark==4.0.0
+omegaconf==2.3.0
+PyYAML
