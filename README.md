@@ -54,3 +54,34 @@ El notebook está estructurado en cuatro fases principales que demuestran el cic
 2.  **Definición del Pipeline:** Se encapsula toda la lógica ETL en una clase `DataPipeline` para un código limpio y mantenible.
 3.  **Ejecución del Pipeline:** Se orquesta la ejecución para múltiples escenarios (diferentes países y fechas) para probar la flexibilidad de la solución.
 4.  **Auditoría de Resultados:** Se verifica que los datos procesados y los datos en cuarentena se hayan escrito correctamente en las carpetas de salida.
+
+## Descripción Gráfica de la Solución
+```mermaid
+flowchart TD
+    subgraph "Entradas del Pipeline"
+        direction LR
+        A["fa:fa-file-csv entregas_productos_prueba.csv <br> (Datos Crudos)"]
+        B["fa:fa-cog config.yaml <br> (Reglas y Parámetros)"]
+    end
+
+    subgraph "Proceso ETL en PySpark/Databricks"
+        direction TD
+        C["1. Lectura y Carga de Datos"]
+        D{"2. Validación y Calidad de Datos"}
+        E["3. Transformaciones de Negocio <br> - Filtrado por fecha/país <br> - Normalización de unidades <br> - Clasificación de entregas <br> - Estandarización de columnas"]
+    end
+
+    subgraph "Salidas Generadas"
+        direction LR
+        F[("fa:fa-database Datos Procesados (Silver) <br> Formato: Parquet <br> Particionado por fecha_proceso")]
+        G[("fa:fa-database Registros en Cuarentena <br> Formato: Parquet <br> Contiene motivo del rechazo")]
+    end
+
+    %% Conexiones del Flujo
+    A --> C
+    B --> C
+    C --> D
+    D -->|Registros Válidos| E
+    D -->|Registros Inválidos| G
+    E --> F
+```
