@@ -1,0 +1,63 @@
+
+# =============================================================================
+# Configuración Central para el Pipeline ETL de Entregas
+# =============================================================================
+
+# --- Rutas del Sistema de Archivos ---
+paths:
+  base: "{base_path}"
+  input_data: "${{paths.base}}/bronze/entregas_productos_prueba.csv"
+  output_processed: "${{paths.base}}/silver/entregas_productos_procesados"
+  output_quarantine: "${{paths.base}}/quarantine/entregas_productos_invalidos"
+
+# --- Parámetros de Ejecución ---
+# Estos son los parámetros que típicamente se cambian en cada ejecución.
+run_params:
+  start_date: "2025-01-01"   # Formato: YYYY-MM-DD
+  end_date: "2025-06-30"     # Formato: YYYY-MM-DD
+  country_code: "GT"         # Código de país a procesar (ej: GT, PE, SV)
+
+# --- Reglas de Negocio y Transformaciones ---
+business_logic:
+  unit_conversion:
+    CS: 20
+    ST: 1
+  
+  delivery_types:
+    routine: ["ZPRE", "ZVE1"]
+    bonus: ["Z04", "Z05"]
+
+# --- Controles de Calidad de Datos ---
+data_quality:
+  allow_duplicates: false # Si es 'true', no se eliminarán filas duplicadas.
+  
+  # Columnas que no pueden ser nulas o vacías para que un registro sea válido.
+  required_columns: ["pais", "fecha_proceso", "material", "cantidad", "unidad", "tipo_entrega"]
+
+# --- Estructura y Enriquecimiento del Resultado Final ---
+schema_and_enrichment:
+  # Mapeo para estandarizar los nombres de las columnas.
+  column_rename_map:
+    pais: "codigo_pais"
+    fecha_proceso: "fecha_proceso"
+    transporte: "id_transporte"
+    ruta: "id_ruta"
+    material: "id_material"
+    precio: "precio"
+    cantidad: "cantidad_original"
+    unidad: "unidad_original"
+  
+  # Mapeo para añadir el nombre completo del país.
+  country_mapping:
+    GT: "Guatemala"
+    PE: "Perú"
+    EC: "Ecuador"
+    SV: "El Salvador"
+    HN: "Honduras"
+    JM: "Jamaica"
+
+# --- Configuración de Salida ---
+output:
+  partition_column: "fecha_proceso"
+  format: "parquet"
+  mode: "overwrite"
