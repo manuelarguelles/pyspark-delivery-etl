@@ -19,7 +19,7 @@ La solución fue desarrollada y probada exitosamente en el siguiente entorno de 
 ├── data/
 │   └── entregas_productos_prueba.csv # Datos de entrada
 ├── notebooks/
-│   └── Prueba_Tecnica_Final.py # El notebook principal exportado como script .py
+│   └── 20250723_etl_entrega_productos.ipynb # El notebook principal
 ├── README.md                # Este archivo
 └── requirements.txt         # Dependencias del proyecto
 ```
