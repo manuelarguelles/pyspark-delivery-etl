@@ -20,6 +20,7 @@ La solución fue desarrollada y probada exitosamente en el siguiente entorno de 
 │   └── entregas_productos_prueba.csv # Datos de entrada
 ├── notebooks/
 │   └── 20250723_etl_entrega_productos.ipynb # El notebook principal
+├── LICENSE                  # MIT License
 ├── README.md                # Este archivo
 └── requirements.txt         # Dependencias del proyecto
 ```
