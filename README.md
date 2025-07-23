@@ -12,22 +12,18 @@ La solución fue desarrollada y probada exitosamente en el siguiente entorno de 
 - **Librerías Principales:** `pyspark`, `omegaconf`, `PyYAML`
 
 ### Estructura del Repositorio
+
+```
+.
 ├── config/
-
-│ └── config.yaml # Archivo de configuración base (opcional, ya que el notebook lo genera)
-
+│   └── config.yaml          # Archivo de configuración (opcional, ya que el notebook lo genera)
 ├── data/
-
-│ └── entregas_productos_prueba.csv # Datos de entrada
-
+│   └── entregas_productos_prueba.csv # Datos de entrada
 ├── notebooks/
-
-│ └── 20250723_etl_entrega_productos.py # El notebook principal exportado como script .py
-
-├── README.md # Este archivo
-
-└── requirements.txt # Dependencias del proyecto
-
+│   └── Prueba_Tecnica_Final.py # El notebook principal exportado como script .py
+├── README.md                # Este archivo
+└── requirements.txt         # Dependencias del proyecto
+```
 
 ## Instalación
 
